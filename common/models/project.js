@@ -1,22 +1,45 @@
 "use strict";
 
-var CONTAINERS_URL = "/api/containers/";
+const CONTAINERS_URL = "/api/containers/";
+const BUCKET = "jdiazs";
 module.exports = function(Project) {
+	/*
+	 *	Hook for delete the container file before delete the project obj.with his metadata.
+	 */
+	Project.observe("before delete", async function(ctx, cb) {
+		Project.find(
+			{
+				where: {
+					project_id: ctx.where.project_id
+				}
+			},
+			function(err, projects) {
+				projects.forEach(function(project) {
+					var file = project.url.split("/");
+					file = file[file.length - 1];
+					Project.app.models.container.removeFile(BUCKET, file);
+				});
+			}
+		);
+		return;
+	});
 
-	
+	/*
+	 *	Remote method for upload a file > container model, and with a trigger define a project with the name of the file.
+	 */
 	Project.uploadProject = function(ctx, options, cb) {
 		Project.app.models.container.upload(
 			ctx.req,
 			ctx.result,
 			{
 				maxFileSize: 10 * 1024 * 1024,
-				container: 'jdiazs',
-				allowedContentTypes: ['image/png', 'image/jpeg', 'image/jpg']
-  			},
+				container: BUCKET,
+				allowedContentTypes: ["image/png", "image/jpeg", "image/jpg"]
+			},
 			function(err, projectObj) {
 				if (err) cb(err);
 				else {
-					var projectInfo = projectObj.files[''][0];
+					var projectInfo = projectObj.files[""][0];
 					Project.create(
 						{
 							name: projectInfo.name.split(".")[0],
