@@ -4,7 +4,16 @@ const port = process.env.LOOPBACK_PORT
 const host = process.env.LOOPBACK_HOST
 const CONTAINERS_URL = `${host}:${port}/api/containers/`;
 const BUCKET = "jdiazs";
+
 module.exports = function(Project) {
+	/*
+	 *	Hook for set de current date on the creation of a project
+	 */
+	Project.observe('before save', async function(ctx) {
+		ctx.instance.created_at = new Date();
+		return;
+	});
+
 	/*
 	 *	Hook for delete the container file before delete the project obj.with his metadata.
 	 */
@@ -25,6 +34,24 @@ module.exports = function(Project) {
 		);
 		return;
 	});
+
+	/*
+	 *	Remote method for retrieve the last two uploaded projects
+	 */
+	Project.recentProjects = function(cb) {
+		Project.find(
+			{
+				order: 'created_at DESC',
+				limit: 2
+			},
+			function(err, projects) {
+				if (err) cb(err);
+	    		else {
+	    			cb(null, projects);
+	    		}
+			}
+		)
+	}
 
 	/*
 	 *	Remote method for upload a file > container model, and with a trigger define a project with the name of the file.
@@ -64,6 +91,15 @@ module.exports = function(Project) {
 			}
 		);
 	};
+
+	Project.remoteMethod("recentProjects", {
+		description: "Retrieve the last two projects",
+		returns: {
+			type: "array",
+			root: true
+		},
+		http: { verb: "get" }
+	})
 
 	Project.remoteMethod("uploadProject", {
 		description: "Uploads a Project",
