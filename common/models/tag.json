@@ -1,13 +1,13 @@
 {
-  "name": "category",
-  "plural": "categories",
+  "name": "tag",
+  "plural": "tags",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "category_id": {
+    "tag_id": {
       "type": "number",
       "id": true,
       "generated": true,
@@ -23,13 +23,14 @@
     "projects": {
       "type": "hasMany",
       "model": "project",
-      "foreignKey": "category_id",
-      "through": "project_category"
+      "foreignKey": "tag_id",
+      "through": "project_tag"
     },
     "posts": {
       "type": "hasMany",
       "model": "post",
-      "foreignKey": "category_id"
+      "foreignKey": "tag_id",
+      "through": "post_tag"
     }
   },
   "acls": [],

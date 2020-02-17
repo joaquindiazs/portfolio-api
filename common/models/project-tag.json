@@ -1,35 +1,36 @@
 {
-  "name": "category",
-  "plural": "categories",
+  "name": "project_tag",
+  "plural": "projects_tags",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "category_id": {
+    "project_tag_id": {
       "type": "number",
       "id": true,
       "generated": true,
       "required": false
     },
-    "name": {
-      "type": "string",
-      "required": true
+    "project_id": {
+      "type": "number"
+    },
+    "tag_id": {
+      "type": "number"
     }
   },
   "validations": [],
   "relations": {
-    "projects": {
-      "type": "hasMany",
+    "project": {
+      "type": "belongsTo",
       "model": "project",
-      "foreignKey": "category_id",
-      "through": "project_category"
+      "foreignKey": "project_id"
     },
-    "posts": {
-      "type": "hasMany",
-      "model": "post",
-      "foreignKey": "category_id"
+    "tag": {
+      "type": "belongsTo",
+      "model": "tag",
+      "foreignKey": "tag_id"
     }
   },
   "acls": [],

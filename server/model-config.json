@@ -13,6 +13,10 @@
       "./mixins"
     ]
   },
+  "container": {
+    "dataSource": "amazonS3",
+    "public": true
+  },
   "category": {
     "dataSource": "portfoliodb",
     "public": true
@@ -21,8 +25,24 @@
     "dataSource": "portfoliodb",
     "public": true
   },
-  "container": {
-    "dataSource": "amazonS3",
+  "tag": {
+    "dataSource": "portfoliodb",
+    "public": true
+  },
+  "project_category": {
+    "dataSource": "portfoliodb",
+    "public": true
+  },
+  "project_tag": {
+    "dataSource": "portfoliodb",
+    "public": true
+  },
+  "post": {
+    "dataSource": "portfoliodb",
+    "public": true
+  },
+  "post_tag": {
+    "dataSource": "portfoliodb",
     "public": true
   }
 }

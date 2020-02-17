@@ -1,0 +1,38 @@
+{
+  "name": "post_tag",
+  "plural": "posts_tags",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "post_tag_id": {
+      "type": "number",
+      "id": true,
+      "generated": true,
+      "required": false
+    },
+    "post_id": {
+      "type": "number"
+    },
+    "tag_id": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "post": {
+      "type": "belongsTo",
+      "model": "post",
+      "foreignKey": "post_id"
+    },
+    "tag": {
+      "type": "belongsTo",
+      "model": "tag",
+      "foreignKey": "tag_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
