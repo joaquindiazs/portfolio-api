@@ -1,6 +1,8 @@
 "use strict";
 
-const CONTAINERS_URL = "/api/containers/";
+const port = process.env.LOOPBACK_PORT
+const host = process.env.LOOPBACK_HOST
+const CONTAINERS_URL = `${host}:${port}/api/containers/`;
 const BUCKET = "jdiazs";
 module.exports = function(Project) {
 	/*
@@ -44,6 +46,7 @@ module.exports = function(Project) {
 						{
 							name: projectInfo.name.split(".")[0],
 							url:
+
 								CONTAINERS_URL +
 								projectInfo.container +
 								"/download/" +
