@@ -38,6 +38,7 @@
       "type": "hasMany",
       "model": "tag",
       "foreignKey": "post_id",
+      "keyThrough": "tag_id",
       "through": "post_tag"
     }
   },

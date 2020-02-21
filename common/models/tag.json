@@ -24,12 +24,14 @@
       "type": "hasMany",
       "model": "project",
       "foreignKey": "tag_id",
+      "keyThrough": "project_id",
       "through": "project_tag"
     },
     "posts": {
       "type": "hasMany",
       "model": "post",
       "foreignKey": "tag_id",
+      "keyThrough": "post_id",
       "through": "post_tag"
     }
   },

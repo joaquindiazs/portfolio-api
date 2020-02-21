@@ -37,12 +37,14 @@
       "type": "hasMany",
       "model": "category",
       "foreignKey": "project_id",
+      "keyThrough": "category_id",
       "through": "project_category"
     },
     "tags": {
       "type": "hasMany",
       "model": "tag",
       "foreignKey": "project_id",
+      "keyThrough": "tag_id",
       "through": "project_tag"
     }
   },

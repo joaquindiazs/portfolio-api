@@ -10,7 +10,7 @@ module.exports = function(Project) {
 	 *	Hook for set de current date on the creation of a project
 	 */
 	Project.observe('before save', async function(ctx) {
-		ctx.instance.created_at = new Date();
+		if (!ctx.instance.created_at) ctx.instance.created_at = new Date();
 		return;
 	});
 
