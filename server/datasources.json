@@ -1,20 +1,19 @@
 {
   "portfoliodb": {
-    "host": "localhost",
-    "port": 5432,
-    "url": "postgres://postgres:postgres@localhost:5432/portfoliodb?ssl=false",
-    "database": "portfoliodb",
-    "password": "postgres",
     "name": "portfoliodb",
+    "host": "${PSQL_JDIAZS_HOST}",
+    "port": "${PSQL_JDIAZS_PORT}",
+    "user": "${PSQL_JDIAZS_USERNAME}",
+    "password": "${PSQL_JDIAZS_PASSWORD}",
+    "database": "${PSQL_JDIAZS_DB}",
     "connector": "postgresql",
-    "user": "postgres",
     "ssl": false
   },
   "amazonS3": {
     "name": "amazonS3",
     "connector": "loopback-component-storage",
     "provider": "amazon",
-    "key": "KpXV981Mtx5JyNGjZpt8fa6OMVfWC4yeDWjoM1Jy",
-    "keyId": "AKIAJ6QSMTGIPPBKGNZQ"
+    "key": "${AWS_SECRET_ACCESS_KEY_2}",
+    "keyId": "${AWS_ACCESS_KEY_ID_2}"
   }
 }
